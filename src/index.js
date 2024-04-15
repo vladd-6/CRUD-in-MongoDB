@@ -3,11 +3,42 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Pilots from './pages/Pilots'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>
+  },
+  {
+    path: "/Pilots/:companyId",
+    element: <Pilots/>
+  }
+  // {
+  //   path: "/addPlayer",
+  //   element: <NewPlayerForm/>
+  // },
+  // {
+  //   path: "/editPlayer/:playerId",
+  //   element: <EditPlayerForm/>
+  // },
+  // ,
+  // {
+  //   path: "/getGoals/:playerId",
+  //   element: <Goals/>
+  // }
+]);
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
