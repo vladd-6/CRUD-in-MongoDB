@@ -68,24 +68,25 @@ app.get("/getPilot/:companyId", async (req, res) => {
 //     res.send(player.goals).status(200);
 //   });
 
-// app.post("/addPlayer", async (req, res) => {
-//     try {
-//       const { name, number, position, teamId } = req.body;
-//       const newDocument =   {
-//                 name: name,
-//                 number: number,
-//                 position: position,
-//                 team: new ObjectId(teamId),
-//                 goals: []
-//       }
-//       let collection = await database.collection("players");
-//       let result = await collection.insertOne(newDocument);
-//       res.send(result).status(204);
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).send("Error adding player");
-//     }
-//   });
+app.post("/addPilot", async (req, res) => {
+    try {
+      const { name, email, phone, role, company, flight_hours} = req.body;
+      const newDocument =   {
+                name: name,
+                email: email,
+                phone: phone,
+                role: role,
+                company: new ObjectId(company),
+                flight_hours: flight_hours
+      }
+      let collection = await database.collection("Pilots");
+      let result = await collection.insertOne(newDocument);
+      res.send(result).status(204);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error adding pilot");
+    }
+  });
 
 // app.patch("/editPlayer/:id", async (req, res) => {
 //     try {
@@ -110,16 +111,16 @@ app.get("/getPilot/:companyId", async (req, res) => {
 //     }
 //   });
 
-// app.delete("/deletePlayer/:playerId", async (req, res) => {
-//     try {
-//         const query = { _id: new ObjectId(req.params.playerId) };
+app.delete("/deletePilot/:pilotId", async (req, res) => {
+    try {
+        const query = { _id: new ObjectId(req.params.pilotId) };
     
-//         const collection = database.collection("players");
-//         let result = await collection.deleteOne(query);
+        const collection = database.collection("Pilots");
+        let result = await collection.deleteOne(query);
     
-//         res.send(result).status(200);
-//       } catch (err) {
-//         console.error(err);
-//         res.status(500).send("Error deleting player");
-//       }
-// })
+        res.send(result).status(200);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Error deleting pilot");
+      }
+})

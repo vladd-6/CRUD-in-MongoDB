@@ -31,7 +31,7 @@ function Pilots(){
                 setPilots(pilots.filter(pilots => pilots._id !== pilotId));
             }
         })
-        .catch(error => console.error('Error deleting player:', error));
+        .catch(error => console.error('Error deleting pilot:', error));
     };
 
     return(
@@ -40,8 +40,8 @@ function Pilots(){
             <Link to="/">
                 <button type="button" className="btn btn-primary">Back</button>
             </Link>
-            <Link to={`/addPlayer`} state={{companyId: companyId}}>
-                <button type="button" className="btn btn-primary">Add player</button>
+            <Link to={`/addPilot`} state={{companyId: companyId}}>
+                <button type="button" className="btn btn-primary">Add pilot</button>
             </Link>
             <table className="table">
                 <thead>

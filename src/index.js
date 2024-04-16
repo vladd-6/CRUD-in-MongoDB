@@ -8,6 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Pilots from './pages/Pilots'
+import NewPilotForm from './pages/NewPilotForm';
 
 const router = createBrowserRouter([
   {
@@ -17,11 +18,11 @@ const router = createBrowserRouter([
   {
     path: "/Pilots/:companyId",
     element: <Pilots/>
+  },
+  {
+    path: "/addPilot",
+    element: <NewPilotForm/>
   }
-  // {
-  //   path: "/addPlayer",
-  //   element: <NewPlayerForm/>
-  // },
   // {
   //   path: "/editPlayer/:playerId",
   //   element: <EditPlayerForm/>
@@ -42,7 +43,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
