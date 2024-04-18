@@ -18,7 +18,6 @@ function Pilots(){
         .then(response => response.json())
         .then(pilots => setPilots(pilots))
         .catch(error => console.error('Error fetching data:', error));
-        // console.log(companyId);
     }, [companyId]);
 
     const handleDelete = (pilotId) => {
@@ -47,6 +46,7 @@ function Pilots(){
                 <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Email</th>
                     <th>Role</th>
                     <th>Flight Hours</th>
                 </tr>
@@ -55,12 +55,13 @@ function Pilots(){
                 {pilots.map(item => (
                     <tr key={item._id}>
                     <td>{item.name}</td>
+                    <td>{item.email}</td>
                     <td>{item.role}</td>
                     <td>{item.flight_hours}</td>
                     <td> 
                         <button className="btn btn-danger" onClick={() => handleDelete(item._id)}>Delete</button>
                         
-                        <Link to={`/editPlayer/${item._id}`} state={{ playerDataToEdit: item }}>
+                        <Link to={`/editPilot/${item._id}`} state={{ playerDataToEdit: item }}>
                             <button className="btn btn-primary ml-2">Edit</button>
                         </Link>
                     </td> 

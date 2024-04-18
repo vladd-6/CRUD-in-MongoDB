@@ -11,7 +11,7 @@ var database;
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://vladconstantinungureanu:iItcPBdVNU4JIQcg@airlinedb.8sslpjg.mongodb.net/?retryWrites=true&w=majority&appName=AirlineDB";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -22,9 +22,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
 
     database = client.db("Airline")
@@ -37,7 +35,6 @@ async function run() {
 
 var PORT = 5050;
 
-// start the Express server
 app.listen(PORT, () => {
     run().catch(console.dir);
     console.log(`Server listening on port ${PORT}`);
@@ -46,7 +43,6 @@ app.listen(PORT, () => {
 app.get("/getCompanies", async (req, res) => {
     let collection = await database.collection("Companies");
     let results = await collection.find({}).toArray();
-    // console.log(results);
     res.send(results).status(200);
   });
 
@@ -58,15 +54,6 @@ app.get("/getPilot/:companyId", async (req, res) => {
 
     res.send(results).status(200);
   });
-
-// app.get("/getGoals/:playerId", async (req, res) => {
-//     const playerId = req.params.playerId;
-
-//     let collection = await database.collection("players");
-//     let player = await collection.findOne({ _id: new ObjectId(playerId) });
-
-//     res.send(player.goals).status(200);
-//   });
 
 app.post("/addPilot", async (req, res) => {
     try {
@@ -88,28 +75,30 @@ app.post("/addPilot", async (req, res) => {
     }
   });
 
-// app.patch("/editPlayer/:id", async (req, res) => {
-//     try {
+app.patch("/editPilot/:pilotId", async (req, res) => {
+    try {
     
-//       const { playerId, newName, newNumber, newPosition} = req.body;
+      const { pilotId, newName, newEmail, newPhone, newRole, newFlightHours} = req.body;
 
-//       const query = { _id: new ObjectId(playerId) };
-//       const updates = {
-//         $set: {
-//             name: newName,
-//             number: newNumber,
-//             position: newPosition,
-//         },
-//       };
+      const query = { _id: new ObjectId(pilotId) };
+      const updates = {
+        $set: {
+            name: newName,
+            email: newEmail,
+            phone: newPhone,
+            role: newRole,
+            flight_hours: newFlightHours
+        },
+      };
   
-//       let collection = await database.collection("players");
-//       let result = await collection.updateOne(query, updates);
-//       res.send(result).status(200);
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).send("Error updating player");
-//     }
-//   });
+      let collection = await database.collection("Pilots");
+      let result = await collection.updateOne(query, updates);
+      res.send(result).status(200);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error updating pilot");
+    }
+  });
 
 app.delete("/deletePilot/:pilotId", async (req, res) => {
     try {

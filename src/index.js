@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Pilots from './pages/Pilots'
 import NewPilotForm from './pages/NewPilotForm';
+import EditPilotForm from './pages/EditPilotForm';
 
 const router = createBrowserRouter([
   {
@@ -22,19 +23,12 @@ const router = createBrowserRouter([
   {
     path: "/addPilot",
     element: <NewPilotForm/>
+  },
+  {
+    path: "/editPilot/:pilotId",
+    element: <EditPilotForm/>
   }
-  // {
-  //   path: "/editPlayer/:playerId",
-  //   element: <EditPlayerForm/>
-  // },
-  // ,
-  // {
-  //   path: "/getGoals/:playerId",
-  //   element: <Goals/>
-  // }
 ]);
-
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

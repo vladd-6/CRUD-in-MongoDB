@@ -23,6 +23,7 @@ function Companies(){
             <tr>
                 <th>Name</th>
                 <th>Operative Base</th>
+                <th>Hub Airport</th>
                 <th>Country</th>
             </tr>
             </thead>
@@ -31,6 +32,7 @@ function Companies(){
                 <tr key={item._id}>
                 <td>{item.name}</td>
                 <td>{item.operative_base.city}</td>
+                <td>{item.operative_base.name} [{item.operative_base.geo.coordinates[0]}, {item.operative_base.geo.coordinates[1]}]</td>
                 <td>{item.operative_base.country}</td>
                 <td> 
                     <Link to={`/Pilots/${item._id}`} state={{ companyNameToTransfer: item.name}}>
